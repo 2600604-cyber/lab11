@@ -1,0 +1,53 @@
+/* Name: Soban Iqbal | Reg. No: 2600604 */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eef3f5; /* page background */
+  color: #263238;
+}
+
+.site-header {
+  background-color: #00695c; /* header */
+  color: white;
+  padding: 24px 32px;
+}
+
+.site-header h1 {
+  margin: 0 0 4px;
+}
+
+.site-header p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+.section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.stats {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+/* grid layout for the cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.empty-message {
+  color: #b71c1c;
+  font-size: 1.1rem;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  color: #546e7a;
+}

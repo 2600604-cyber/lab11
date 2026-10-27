@@ -1,0 +1,65 @@
+<!-- Name: Soban Iqbal | Reg. No: 2600604 -->
+<!-- Double-click this file to run the Student Cards page in Chrome (needs internet for React CDN). -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Cards</title>
+    <style>
+      body { margin: 0; padding: 24px; font-family: Arial, Helvetica, sans-serif; background-color: #e8f5f3; color: #263238; }
+      .card { border: 2px solid #b0bec5; padding: 14px 18px; border-radius: 10px; background: white; margin-bottom: 12px; max-width: 320px; }
+      .name { margin: 0 0 8px; color: teal; }
+    </style>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function RoleTag({ role }) {
+        const style = {
+          backgroundColor: role === "Teacher" ? "teal" : "gray",
+          color: "white", padding: "2px 10px", borderRadius: "12px",
+          fontSize: "0.85rem", display: "inline-block",
+        };
+        return <span style={style}>{role}</span>;
+      }
+
+      function ProfileCard({ name, role = "Student", city }) {
+        return (
+          <div className="card">
+            <h3 className="name">{name}</h3>
+            <RoleTag role={role} />
+            <p>City: {city ? city : "City not added"}</p>
+          </div>
+        );
+      }
+
+      function App() {
+        const celsius = 30; // change to 40 to see "Hot day!"
+        const fruits = ["Apple", "Mango", "Banana"];
+        const isWeekend = false;
+        return (
+          <div>
+            <h1>Lab 11: React Basics</h1>
+            <h2>Task 1: JSX practice</h2>
+            <p>Temperature: {celsius}&deg;C = {(celsius * 9) / 5 + 32}&deg;F</p>
+            <p>Today is a: {isWeekend ? "Weekend" : "Working day"}</p>
+            <h3>Fruits</h3>
+            <ul>{fruits.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
+            {celsius > 35 && <p>Hot day!</p>}
+            <h2>Task 2 and 3: ProfileCard</h2>
+            <ProfileCard name="Ali Khan" role="Teacher" city="Islamabad" />
+            <ProfileCard name="Sara Ahmed" role="Student" city="Lahore" />
+            <ProfileCard name="Hamza Raza" />
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

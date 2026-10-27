@@ -1,0 +1,14 @@
+/* Name: Soban Iqbal | Reg. No: 2600604 */
+.card {
+  border: 2px solid #b0bec5;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: white;
+  margin-bottom: 12px;
+  max-width: 320px;
+}
+
+.name {
+  margin: 0 0 8px;
+  color: teal;
+}

@@ -1,0 +1,9 @@
+/* Name: Soban Iqbal | Reg. No: 2600604 */
+/* Task 3: global style - light page background */
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e8f5f3;
+  color: #263238;
+}

@@ -1,0 +1,30 @@
+/* Name: Soban Iqbal | Reg. No: 2600604 */
+.card {
+  background: white;
+  border: 2px solid #cfd8dc;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* Bonus: red border for borrowed books */
+.borrowed {
+  border-color: #d32f2f;
+}
+
+.title {
+  margin: 0 0 6px;
+  color: #00695c;
+  font-size: 1.1rem;
+}
+
+.author {
+  margin: 0 0 4px;
+  color: #37474f;
+}
+
+.meta {
+  margin: 0 0 12px;
+  color: #78909c;
+  font-size: 0.9rem;
+}

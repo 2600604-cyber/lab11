@@ -1,0 +1,131 @@
+<!-- Name: Soban Iqbal | Reg. No: 2600604 -->
+<!-- Double-click this file to run the Book Cards page in Chrome (needs internet for React CDN). -->
+<!-- Add  ?empty  to the URL (index.html?empty) to see the "No books found." screenshot. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Cards</title>
+    <style>
+      body { margin: 0; font-family: Arial, Helvetica, sans-serif; background-color: #eef3f5; color: #263238; }
+      .site-header { background-color: #00695c; color: white; padding: 24px 32px; }
+      .site-header h1 { margin: 0 0 4px; }
+      .site-header p { margin: 0; opacity: 0.85; }
+      .section { max-width: 1000px; margin: 0 auto; padding: 16px 24px; }
+      .stats { display: flex; gap: 24px; margin-bottom: 16px; font-weight: bold; }
+      .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+      .empty-message { color: #b71c1c; font-size: 1.1rem; }
+      .site-footer { text-align: center; padding: 20px; color: #546e7a; }
+      /* BookCard styles (CSS module in the Vite version) */
+      .card { background: white; border: 2px solid #cfd8dc; border-radius: 10px; padding: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+      .card.borrowed { border-color: #d32f2f; }
+      .card .title { margin: 0 0 6px; color: #00695c; font-size: 1.1rem; }
+      .card .author { margin: 0 0 4px; color: #37474f; }
+      .card .meta { margin: 0 0 12px; color: #78909c; font-size: 0.9rem; }
+    </style>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.24.7/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // ----- data (books.js) -----
+      const allBooks = [
+        { id: 1, title: "Clean Code", author: "Robert C. Martin", year: 2008, available: true, category: "Programming" },
+        { id: 2, title: "The Pragmatic Programmer", author: "Andrew Hunt", year: 1999, available: false, category: "Programming" },
+        { id: 3, title: "Database System Concepts", author: "Abraham Silberschatz", year: 2019, available: true, category: "Databases" },
+        { id: 4, title: "A Brief History of Time", author: "Stephen Hawking", year: 1988, available: true },
+        { id: 5, title: "Eloquent JavaScript", author: "Marijn Haverbeke", year: 2018, available: false, category: "Programming" },
+        { id: 6, title: "The Alchemist", author: "Paulo Coelho", year: 1988, available: true },
+        { id: 7, title: "Learning React", author: "Alex Banks", year: 2020, available: false, category: "Programming" },
+      ];
+      const books = window.location.search.includes("empty") ? [] : allBooks;
+
+      // ----- components -----
+      function Header({ title, subtitle }) {
+        return (
+          <header className="site-header">
+            <h1>{title}</h1>
+            <p>{subtitle}</p>
+          </header>
+        );
+      }
+
+      function Footer({ name }) {
+        const year = new Date().getFullYear();
+        return <footer className="site-footer"><p>&copy; {year} {name}</p></footer>;
+      }
+
+      function Section({ heading, children }) {
+        return (
+          <section className="section">
+            <h2>{heading}</h2>
+            {children}
+          </section>
+        );
+      }
+
+      function BookStatus({ available }) {
+        const style = {
+          backgroundColor: available ? "green" : "red",
+          color: "white", padding: "2px 10px", borderRadius: "12px",
+          fontSize: "0.85rem", display: "inline-block",
+        };
+        return <span style={style}>{available ? "Available" : "Borrowed"}</span>;
+      }
+
+      function BookCard({ title, author, year, available, category = "General" }) {
+        return (
+          <article className={available ? "card" : "card borrowed"}>
+            <h3 className="title">{title}</h3>
+            <p className="author">by {author}</p>
+            <p className="meta">{year} &bull; {category}</p>
+            <BookStatus available={available} />
+          </article>
+        );
+      }
+
+      function BookGrid({ list }) {
+        return (
+          <div className="card-grid">
+            {list.map((book) => (
+              <BookCard key={book.id} title={book.title} author={book.author}
+                year={book.year} available={book.available} category={book.category} />
+            ))}
+          </div>
+        );
+      }
+
+      // ----- App -----
+      function App() {
+        const totalBooks = books.length;
+        const availableBooks = books.filter((b) => b.available).length;
+        const programmingBooks = books.filter((b) => b.category === "Programming");
+
+        return (
+          <div>
+            <Header title="Book Cards" subtitle="Our small library at a glance" />
+            <Section heading="All Books">
+              <div className="stats">
+                <span>Total books: {totalBooks}</span>
+                <span>Available: {availableBooks}</span>
+              </div>
+              {books.length === 0 ? <p className="empty-message">No books found.</p> : <BookGrid list={books} />}
+            </Section>
+            {programmingBooks.length > 0 && (
+              <Section heading="Programming Books">
+                <BookGrid list={programmingBooks} />
+              </Section>
+            )}
+            <Footer name="Soban Iqbal (2600604)" />
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>
